@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <title>Hello world</title>
+    <link href="./index.css" type="text/css" rel="stylesheet">
+    <script type="module" src="./demo.js"></script>
+</head>
+<body class="p-6">
+<nav class="mx-auto w-full">
+    <ul class="text-sm flex flex-row gap-2 fixed">
+        <li>
+            <a href="#search" class="link">Search</a>
+        </li>
+        <li>
+           <a href="#generative" class="link">Generative</a>
+        </li>
+        <li>
+            <a href="#visual-search" class="link">Visual search</a>
+        </li>
+    </ul>
+</nav>
+<main class="flex-col">
+    <section id="search" class="h-screen">
+        <div class="mx-auto w-1/2 pt-8">
+            <form class="w-full" id="search-form">
+                <label class="mx-auto mt-8 relative bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full"
+                       for="search-input">
+                    <input id="search-input"
+                           placeholder="Let's explore"
+                           name="search-input"
+                           class="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
+                           autocomplete="off"
+                    />
+                    <button type="submit"
+                            class="w-full md:w-auto px-3 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
+                        <div class="flex items-center transition-all opacity-1 text-sm">
+                            Search
+                        </div>
+                    </button>
+                </label>
+            </form>
+
+            <div id="search-results" class="pt-6">
+
+            </div>
+        </div>
+    </section>
+    <section id="generative" class="h-screen">
+        <div class="mx-auto w-1/2 pt-8">
+            <form class="w-full" id="generative-form">
+                <label class="mx-auto mt-8 relative bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full"
+                       for="generative-input-context"
+                >
+                    <input id="generative-input-context"
+                           placeholder="What is the context of the generation?"
+                           name="context"
+                           class="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
+                           autocomplete="off"
+                    />
+                </label>
+                <label class="mx-auto mt-8 relative bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full"
+                       for="generative-input-prompt">
+                    <textarea id="generative-input-prompt"
+                              placeholder="Here your prompt goes..."
+                              name="prompt"
+                              class="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
+                              autocomplete="off"
+                    ></textarea>
+                    <button type="submit"
+                            class="w-full md:w-auto px-3 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
+                        <div class="flex items-center transition-all opacity-1 text-sm">
+                            Generate
+                        </div>
+                    </button>
+                </label>
+            </form>
+            <div id="generative-results" class="pt-6">
+            </div>
+        </div>
+    </section>
+    <section id="visual-search" class="h-screen">
+        <div class="mx-auto w-1/2 pt-8">
+            <form class="w-full" id="visual-search-form">
+                <label class="mx-auto mt-8 relative bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full"
+                       for="search-input">
+                    <input id="visual-search-input"
+                           placeholder="Image url"
+                           name="visual-search-input"
+                           class="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
+                           autocomplete="off"
+                    />
+                    <button type="submit"
+                            class="w-full md:w-auto px-3 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
+                        <div class="flex items-center transition-all opacity-1 text-sm">
+                            Search
+                        </div>
+                    </button>
+                </label>
+            </form>
+            <div id="visual-search-results" class="pt-6">
+
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const links = document.querySelectorAll('.link');
+
+        function changeLinkState() {
+            links.forEach((link, idx) => {
+                const isActive = link.href === window.location.href;
+                if (isActive) {
+                    link.classList.add('active-link'); // Or directly apply Tailwind classes here
+                } else {
+                    link.classList.remove('active-link');
+                }
+            });
+        }
+
+        window.addEventListener('hashchange', changeLinkState, false);
+        changeLinkState(); // Initial check
+    });
+</script>
+</html>

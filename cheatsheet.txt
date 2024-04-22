@@ -1,0 +1,27 @@
+// visual search image size query
+fm=png&fit=crop&w=224&max-h=224
+
+
+
+Examples
+
+// Visual search
+const {ImageBlock} = await u.get.imageBlock.select('url').exec().then(resolveResponse)
+
+    const sourceImageURL = ImageBlock[6].url
+    const resizedImageUrl = `${sourceImageURL}?max-w=180&max-h=180&fit=crop&fm=png`
+
+    const base = await getBase64(resizedImageUrl)
+    const cleanBase = base.split(",")[1];
+    document.body.innerHTML += `Input image: <br/><img src="${base}" width="100">`
+
+    const similarResults = await u.get.imageBlock.similar
+        .image(cleanBase)
+        .select("url")
+        .limit(3)
+        .exec()
+        .then(resolveResponse)
+
+    similarResults.ImageBlock.forEach((image) => {
+        document.body.innerHTML += `<br/><img src="${image.url}" width="100">`
+    })
