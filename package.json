@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "@unbody-io/ts-client": "^0.0.8"
+    "@unbody-io/ts-client": "^0.0.15"
   }
 }
