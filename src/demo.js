@@ -20,14 +20,6 @@ const visualSearchForm = document.getElementById("visual-search-form")
 const visualBtnSearch = document.getElementById("visual-search-button")
 const visualBtnGenerative = document.getElementById("visual-search-generate-button")
 
-
-const unbody = new Unbody({
-    apiKey: "",
-    projectId: "",
-});
-
-
-
 const imageCard = ({url, originalName, autoTypes}) => {
     if(!autoTypes)  return "";
 
@@ -37,6 +29,11 @@ const imageCard = ({url, originalName, autoTypes}) => {
                 <span class="text-xs">${autoTypes? autoTypes:""}</span>
            </div>`
 }
+
+const unbody = new Unbody({
+    apiKey: process.env.NEXT_PUBLIC_UNBODY_API_KEY,
+    projectId: process.env.NEXT_PUBLIC_UNBODY_PROJECT_ID,
+});
 
 (async () => {
    const {data: {payload}} = await unbody.get
@@ -48,7 +45,6 @@ const imageCard = ({url, originalName, autoTypes}) => {
         ${payload.map(imageCard).join("")}
      </div>`
 })()
-
 
 
 visualBtnSearch.addEventListener("click", async (e) => {
@@ -96,6 +92,7 @@ visualBtnGenerative.addEventListener("click", async (e) => {
         .exec();
 
     visualSearchResults.innerText = ""
+
     if (generate) {
         visualSearchResults.innerHTML += `<div class="whitespace-pre max-w-screen-md p-6">${generate.result}</div>`
     }
@@ -106,12 +103,6 @@ visualBtnGenerative.addEventListener("click", async (e) => {
         </div>
     `
 });
-
-
-
-
-
-
 
 
 
